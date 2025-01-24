@@ -51,7 +51,7 @@ class RemoteCoinDataSource(
             httpClient.get(
                 urlString = constructUrl("/assets/$coinId/history")
             ){
-                parameter("intercal", "h6")
+                parameter("interval", "h6")
                 parameter("start", startMillis)
                 parameter("end", endMillis)
             }

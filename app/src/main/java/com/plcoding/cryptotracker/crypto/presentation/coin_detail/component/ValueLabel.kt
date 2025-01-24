@@ -7,7 +7,7 @@ data class ValueLabel(
     val value: Float,
     val unit: String
 ){
-    fun formatter(): String{
+    fun formatted(): String{
         val formatter = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
             val fractionDigit = when{
                 value> 1000 -> 0
