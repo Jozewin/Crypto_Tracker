@@ -21,11 +21,12 @@ import java.time.ZonedDateTime
 class RemoteCoinDataSource(
     private val httpClient: HttpClient
 ) : CoinDataSource{
-
+    
+    private final val API_KEY = "INSERT YOUR API KEY HERE"
     override suspend fun getCoins(): Result<List<Coin>, NetworkError> {
         return safeCall<CoinsResponseDto> {
             httpClient.get(
-                urlString = constructUrl("/assets")
+                urlString = constructUrl("/assets?apiKey=$API_KEY")
             )
         }.map { response->
             response.data.map {
@@ -49,7 +50,7 @@ class RemoteCoinDataSource(
             .toEpochMilli()
         return safeCall<CoinHistoryDto> {
             httpClient.get(
-                urlString = constructUrl("/assets/$coinId/history")
+                urlString = constructUrl("/assets/$coinId/history?apiKey=$API_KEY")
             ){
                 parameter("interval", "h6")
                 parameter("start", startMillis)
